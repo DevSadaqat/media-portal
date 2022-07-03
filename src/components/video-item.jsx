@@ -1,0 +1,29 @@
+import { Col, Image, Row } from 'react-bootstrap';
+import { Video } from '../interfaces/video';
+
+// interface VideoItemProps {
+//   video: Video;
+// }
+
+
+export default function VideoItem(props) {
+  // const { video } = props;
+  
+  const videoItems = props.videos.map((video) => 
+    <Row key={video.id}>
+      <Col xs='12' md='3' className='mb-3'>
+        <Image fluid rounded src={`${video.thumbnail}?size=small`} alt={video.name} className='w-100' />
+      </Col>
+      <Col xs='12' md='9' className='mb-3'>
+        <h2 className='h4'>{video.name}</h2>
+        <p>{video.description}</p>
+      </Col>
+    </Row>
+  );
+ 
+  return (
+    <div>
+      {videoItems}
+    </div>
+  )
+}
