@@ -4,6 +4,7 @@ import { NotFound, Playlists, PlaylistVideos, Videos } from './routes';
 import Layout from './components/layout';
 import VideoItem from './components/video-item';
 import PlaylistItem from './components/playlist-item';
+import NewPlayList from './components/NewPlayList';
 
 export default function App() {
 
@@ -38,13 +39,28 @@ useEffect(() => {
   });
 }, []);
 
+// function for adding a new playlist 
+const onAddPlayList = (playList) => {
+  console.log(playList);
+  setPlayListData([playList, ...playListData]);
+  console.log(playListData);
+}
+
+const removePlayList = (id) => {
+  const newPlayList = playListData.filter((playList) => {
+    return playList.id !== id;
+  });
+  setPlayListData(newPlayList);
+};
+
 
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route path='' element={<Navigate to='/playlists' replace />} />
         <Route path='playlists'>
-          <Route index element={<PlaylistItem playLists = {playListData} />} />
+          <Route index element={<PlaylistItem playLists = {playListData} removePlayList={removePlayList} />} />
+          <Route exact path="newPlayList" element={<NewPlayList onAddPlayList={onAddPlayList} />} />
           <Route path=':id' element={<PlaylistVideos />} />
         </Route>
         <Route path='videos' element={<VideoItem videos = {videoData} />}/>
