@@ -4,6 +4,8 @@ import { NotFound, Playlists, PlaylistVideos, Videos } from './routes';
 import Layout from './components/layout';
 import { Playlist } from './interfaces/playlist';
 import { Video } from '../src/interfaces/video';
+import VideoItem from '../src/components/video-item'
+
 
 interface PlaylistItemProps {
   playlist: Playlist;
@@ -12,6 +14,8 @@ interface PlaylistItemProps {
 interface VideoItemProps {
   video: Video;
 }
+
+
 
 export default function App() {
 
@@ -52,10 +56,10 @@ useEffect(() => {
       <Route path='/' element={<Layout />}>
         <Route path='' element={<Navigate to='/playlists' replace />} />
         <Route path='playlists'>
-          <Route index element={<Playlists  />} />
+          <Route index element={<PlaylistItem  />} />
           <Route path=':id' element={<PlaylistVideos />} />
         </Route>
-        <Route path='videos' element={<Videos/>} />
+        <Route path='videos' element={<VideoItem video={videoData}/>} />
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
