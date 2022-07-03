@@ -5,9 +5,11 @@ interface VideoItemProps {
   video: Video;
 }
 
+
 export default function VideoItem(props: VideoItemProps) {
   const { video } = props;
-
+  
+ 
   return (
     <Row>
       <Col xs='12' md='3' className='mb-3'>
